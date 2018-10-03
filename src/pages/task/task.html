@@ -1,0 +1,33 @@
+<!--
+  Generated template for the TaskPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <head-app></head-app>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div class="form">
+        <ion-list>
+            <ion-item>
+                <ion-label>Who</ion-label>
+                <ion-select [(ngModel)]="gender" interface="action-sheet">
+                    <ion-option value="Moi">Moi</ion-option>
+                    <ion-option value="Aziz">Aziz Lahlou</ion-option>
+                    <ion-option value="Omar">Omar Farad</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>Date</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM" min="2018-09-28" max="2018-10-05" [(ngModel)]="myDate"></ion-datetime>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>

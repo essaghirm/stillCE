@@ -14,3 +14,72 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.header{
+    .toolbar{
+        background: red;
+        &::after{
+            display: none;
+            background: red;
+        }
+    }
+}
+
+.tabbar{
+    .tab-button{
+
+        span{
+            color: lighten(color($colors, dark), 10%);
+        }
+
+        &[aria-selected="true"]{
+            .tab-button-icon{
+                background: color($colors, primary);
+            }
+
+            span{
+                color: color($colors, primary);
+            }
+        }
+
+        .tab-button-icon{
+            width: 24px;
+            height: 24px;
+            background-color: lighten(color($colors, dark), 10%);
+
+            &[class$="-task"]{
+                mask-image: url(../assets/icon/task.svg);
+            }
+
+            &[class$="-dashboard"]{
+                mask-image: url(../assets/icon/dashboard.svg);
+            }
+
+            &[class$="-meeting"]{
+                mask-image: url(../assets/icon/meeting.svg);
+            }
+
+            &[class$="-image"]{
+                mask-image: url(../assets/icon/image.svg);
+            }
+        }
+        
+    }
+}
+
+button.icon{
+    background: transparent;
+    height: 30px;
+    width: 30px;
+    position: relative;
+
+    &::before{
+        content: "";
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

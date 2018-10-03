@@ -1,0 +1,33 @@
+head-app {
+    .title{
+        text-align: center;
+    }
+    button.icon{
+        &.add{
+            background: color($colors, dark);
+            mask-image: url(../assets/icon/add.svg);
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+        }
+
+        &.voyant{
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+
+            &.red{
+                background: color($colors, danger)
+            }
+            &.green{
+                background: color($colors, secondary)
+            }
+            
+        }
+    }
+}
