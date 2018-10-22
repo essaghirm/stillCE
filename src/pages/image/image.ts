@@ -14,6 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'image.html',
 })
 export class ImagePage {
+  what:string = "moi"
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

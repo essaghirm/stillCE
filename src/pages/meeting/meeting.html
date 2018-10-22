@@ -5,14 +5,88 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>meeting</ion-title>
-  </ion-navbar>
-
+    <ion-navbar>
+        <head-app></head-app>
+    </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <div class="form-container">
+        <ion-list class="form-list">
+            <ion-item>
+                <ion-label floating>Who</ion-label>
+                <ion-select [(ngModel)]="gender" interface="action-sheet">
+                    <ion-option value="Moi">Moi</ion-option>
+                    <ion-option value="Aziz">Aziz Lahlou</ion-option>
+                    <ion-option value="Omar">Omar Farad</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Projet</ion-label>
+                <ion-select [(ngModel)]="projet" interface="action-sheet">
+                    <ion-option value="Moi">Projet 01</ion-option>
+                    <ion-option value="Aziz">Projet 02</ion-option>
+                    <ion-option value="Omar">Projet 03</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Date</ion-label>
+                <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="myDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Description</ion-label>
+                <ion-textarea></ion-textarea>
+            </ion-item>
+            <!-- <ion-item> -->
+            <button class="submit" ion-button color="secondary">Submit</button>
+            <!-- </ion-item> -->
+        </ion-list>
+    </div>
+
+    <ion-segment [(ngModel)]="what" color="dark" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="All">
+            All
+        </ion-segment-button>
+        <ion-segment-button value="moi">
+            Affecté à moi
+        </ion-segment-button>
+        <ion-segment-button value="Related">
+            Related
+        </ion-segment-button>
+    </ion-segment>
+
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Who</th>
+                <th>Date</th>
+            </tr>
+            <tr>
+                <td>Lorem ipsum dolor sit!...</td>
+                <td>Khalid Bekri</td>
+                <td>13/10 10:00</td>
+            </tr>
+            <!-- <tr>
+                    <td colspan="3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt vero voluptatum repellat doloremque aspernatur ex iste atque a non? Neque.</td>
+                </tr> -->
+            <tr>
+                <td>Lorem ipsum dolor sit!...</td>
+                <td>Me</td>
+                <td>13/10 09:00</td>
+            </tr>
+            <tr>
+                <td>Lorem ipsum dolor sit!...</td>
+                <td>Me</td>
+                <td>13/10 15:00</td>
+            </tr>
+            <tr>
+                <td>Lorem ipsum dolor sit!...</td>
+                <td>Imane Hanin</td>
+                <td>13/10 16:00</td>
+            </tr>
+        </table>
+    </div>
 
 </ion-content>

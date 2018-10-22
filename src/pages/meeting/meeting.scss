@@ -1,3 +1,45 @@
 page-meeting {
 
+    div.form-container{
+        display: table;
+        width: 100%;
+    }
+
+    div.table-container{
+        display: table;
+        width: 100%;
+        margin-top: 15px;
+        padding: 16px;
+
+        table{
+            width: 100%;
+
+            tr{
+                border-bottom: 1px solid lighten(color($colors, dark), 70%);
+
+                &:last-child{
+                    border-bottom: 0px;
+                }
+
+                th{
+                    text-align: left;
+                    padding-bottom: 5px;
+                    padding-right: 5px;
+                }
+                td{
+                    padding-top: 10px;
+                    padding-bottom: 5px;
+                    padding-right: 5px;
+                }
+            }
+        }
+    }
+
+    .button{
+        &.submit{
+            float: right;
+            margin-right: 16px;
+            margin-top: 10px;
+        }
+    }
 }

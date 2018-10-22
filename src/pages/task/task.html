@@ -14,19 +14,89 @@
 
 
 <ion-content>
-    <div class="form">
-        <ion-list>
+    <div class="form-container">
+        <form [formGroup]="task" (ngSubmit)="logForm()">
+            <ion-list class="form-list">
+                <ion-item>
+                    <ion-label floating>Who</ion-label>
+                    <ion-select formControlName="who" interface="action-sheet">
+                        <ion-option value="Moi">Moi</ion-option>
+                        <ion-option value="Aziz">Aziz Lahlou</ion-option>
+                        <ion-option value="Omar">Omar Farad</ion-option>
+                    </ion-select>
+                </ion-item>
+                <!--<ion-item *ngIf="who.hasError('required') && who.touched">required</ion-item>-->
+                <ion-item>
+                    <ion-label floating>Projet</ion-label>
+                    <ion-select formControlName="project" interface="action-sheet">
+                        <ion-option value="Moi">Projet 01</ion-option>
+                        <ion-option value="Aziz">Projet 02</ion-option>
+                        <ion-option value="Omar">Projet 03</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Date</ion-label>
+                    <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="date"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Description</ion-label>
+                    <ion-textarea rows="5"  formControlName="description"></ion-textarea>
+                </ion-item>
+                <!-- <ion-item> -->
+                <button class="submit" clear ion-button color="secondary" type="submit" [disabled]="!task.valid">Submit</button>
+                <!-- </ion-item> -->
+            </ion-list>
+        </form>
+    </div>
+
+    <ion-segment [(ngModel)]="what" color="dark" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="All">
+            All
+        </ion-segment-button>
+        <ion-segment-button value="moi">
+            Affecté à moi
+        </ion-segment-button>
+        <ion-segment-button value="Related">
+            Related
+        </ion-segment-button>
+    </ion-segment>
+
+    <div class="table-container">
+        <ion-list reorder="true">
             <ion-item>
-                <ion-label>Who</ion-label>
-                <ion-select [(ngModel)]="gender" interface="action-sheet">
-                    <ion-option value="Moi">Moi</ion-option>
-                    <ion-option value="Aziz">Aziz Lahlou</ion-option>
-                    <ion-option value="Omar">Omar Farad</ion-option>
-                </ion-select>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, necessitatibus?</p>
+                <div class="data">
+                    <span class="date">21/11</span>
+                    <span class="who">Khalid Ghomri</span>
+                </div>
             </ion-item>
             <ion-item>
-                <ion-label>Date</ion-label>
-                <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM" min="2018-09-28" max="2018-10-05" [(ngModel)]="myDate"></ion-datetime>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, necessitatibus?</p>
+                <div class="data">
+                    <span class="date">21/11</span>
+                    <span class="who">Khalid Ghomri</span>
+                </div>
+            </ion-item>
+            <ion-item>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, necessitatibus?</p>
+                <div class="data">
+                    <span class="date">21/11</span>
+                    <span class="who">Khalid Ghomri</span>
+                </div>
+            </ion-item>
+            <ion-item>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, necessitatibus?</p>
+                <div class="data">
+                    <span class="date">21/11</span>
+                    <span class="who">Khalid Ghomri</span>
+                </div>
+            </ion-item>
+            <ion-item>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, necessitatibus?</p>
+                <div class="data">
+                    <span class="date">21/11</span>
+                    <span class="who">Khalid Ghomri</span>
+                </div>
             </ion-item>
         </ion-list>
     </div>

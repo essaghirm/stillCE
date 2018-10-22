@@ -15,6 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DashboardPage {
 
+  progress : number = 0
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

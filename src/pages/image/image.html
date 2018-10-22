@@ -6,13 +6,50 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>image</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <head-app></head-app>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <div class="form-container">
+        <ion-list class="form-list">
+            <ion-item>
+                <ion-label floating>Projet</ion-label>
+                <ion-select [(ngModel)]="projet" interface="action-sheet">
+                    <ion-option value="Moi">Projet 01</ion-option>
+                    <ion-option value="Aziz">Projet 02</ion-option>
+                    <ion-option value="Omar">Projet 03</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+        <div class="camera-container">
+            <button ion-button class="icon gallery"></button>
+            <button ion-button class="icon camera"></button>
+        </div>
+    </div>
 
+    <ion-segment [(ngModel)]="what" color="dark" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="All">
+            All
+        </ion-segment-button>
+        <ion-segment-button value="moi">
+            Affecté à moi
+        </ion-segment-button>
+        <ion-segment-button value="Related">
+            Related
+        </ion-segment-button>
+    </ion-segment>
+
+    <div class="images-container">
+        <ion-img src="assets/imgs/projects/1.jpeg" imageViewer></ion-img>
+        <ion-img src="assets/imgs/projects/2.jpeg" imageViewer></ion-img>
+        <ion-img src="assets/imgs/projects/3.jpg" imageViewer></ion-img>
+        <ion-img src="assets/imgs/projects/4.jpeg" imageViewer></ion-img>
+        <ion-img src="assets/imgs/projects/5.jpeg" imageViewer></ion-img>
+        <ion-img src="assets/imgs/projects/6.jpeg" imageViewer></ion-img>
+        <ion-img src="assets/imgs/projects/7.jpeg" imageViewer></ion-img>
+    </div>
 </ion-content>

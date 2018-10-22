@@ -14,6 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'meeting.html',
 })
 export class MeetingPage {
+  what:string = "moi"
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
