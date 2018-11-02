@@ -6,87 +6,73 @@
 -->
 <ion-header>
     <ion-navbar>
-        <head-app></head-app>
+            <button class="icon add" (click)="showForm()"></button>
+            <!-- <ion-title>task</ion-title> -->
+            <button class="icon voyant red"></button>
     </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-    <div class="form-container">
+    <div class="form-container" *ngIf="show_form">
+        <form [formGroup]="meeting" (ngSubmit)="logForm()">
         <ion-list class="form-list">
             <ion-item>
                 <ion-label floating>Who</ion-label>
-                <ion-select [(ngModel)]="gender" interface="action-sheet">
-                    <ion-option value="Moi">Moi</ion-option>
-                    <ion-option value="Aziz">Aziz Lahlou</ion-option>
-                    <ion-option value="Omar">Omar Farad</ion-option>
+                <ion-select formControlName="attachedTo" interface="action-sheet">
+                    <ion-option *ngFor="let u of users; let i=index" value="{{u.id}}">{{u.fullName}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label floating>Projet</ion-label>
-                <ion-select [(ngModel)]="projet" interface="action-sheet">
-                    <ion-option value="Moi">Projet 01</ion-option>
-                    <ion-option value="Aziz">Projet 02</ion-option>
-                    <ion-option value="Omar">Projet 03</ion-option>
+                <ion-select formControlName="project" interface="action-sheet">
+                        <ion-option *ngFor="let p of projects; let i=index" value="{{p.id}}">{{p.client}} -
+                                {{p.region}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
+                    <ion-label floating>Lieu</ion-label>
+                    <ion-select formControlName="lieu" interface="action-sheet">
+                            <ion-option *ngFor="let l of lieux; let i=index" value="{{l.id}}">{{l.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+            <ion-item>
                 <ion-label floating>Date</ion-label>
-                <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="myDate"></ion-datetime>
+                <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="date"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>Description</ion-label>
-                <ion-textarea></ion-textarea>
+                <ion-textarea formControlName="description"></ion-textarea>
             </ion-item>
             <!-- <ion-item> -->
-            <button class="submit" ion-button color="secondary">Submit</button>
+            <button class="submit" clear ion-button color="secondary" type="submit" [disabled]="!meeting.valid">Submit</button>
             <!-- </ion-item> -->
         </ion-list>
+        </form>
     </div>
 
     <ion-segment [(ngModel)]="what" color="dark" (ionChange)="segmentChanged($event)">
-        <ion-segment-button value="All">
-            All
-        </ion-segment-button>
-        <ion-segment-button value="moi">
-            Affecté à moi
-        </ion-segment-button>
-        <ion-segment-button value="Related">
-            Related
-        </ion-segment-button>
+            <ion-segment-button value="all">
+                    All
+                </ion-segment-button>
+                <ion-segment-button value="attachedToMe">
+                    Affecté à moi
+                </ion-segment-button>
+                <ion-segment-button value="related">
+                    Related
+                </ion-segment-button>
     </ion-segment>
 
     <div class="table-container">
-        <table>
-            <tr>
-                <th>Description</th>
-                <th>Who</th>
-                <th>Date</th>
-            </tr>
-            <tr>
-                <td>Lorem ipsum dolor sit!...</td>
-                <td>Khalid Bekri</td>
-                <td>13/10 10:00</td>
-            </tr>
-            <!-- <tr>
-                    <td colspan="3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt vero voluptatum repellat doloremque aspernatur ex iste atque a non? Neque.</td>
-                </tr> -->
-            <tr>
-                <td>Lorem ipsum dolor sit!...</td>
-                <td>Me</td>
-                <td>13/10 09:00</td>
-            </tr>
-            <tr>
-                <td>Lorem ipsum dolor sit!...</td>
-                <td>Me</td>
-                <td>13/10 15:00</td>
-            </tr>
-            <tr>
-                <td>Lorem ipsum dolor sit!...</td>
-                <td>Imane Hanin</td>
-                <td>13/10 16:00</td>
-            </tr>
-        </table>
+        <ion-list>
+            <ion-item *ngFor="let m of meetings; let i=index">
+                <p>{{ m.description | slice:0:80}}...</p>
+                <div class="data">
+                    <span class="date" [ngClass]="(m.confirmation) ? 'confirmed' : 'not'">{{ m.date.timestamp | date:'dd/MM/yy' }}</span>
+                    <span class="who">{{ m.attachedTo.fullName }}</span>
+                </div>
+            </ion-item>
+        </ion-list>
     </div>
 
 </ion-content>

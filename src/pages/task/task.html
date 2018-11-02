@@ -7,31 +7,30 @@
 <ion-header>
 
     <ion-navbar>
-        <head-app></head-app>
+        <button class="icon add" (click)="showForm()"></button>
+        <!-- <ion-title>task</ion-title> -->
+        <button class="icon voyant red"></button>
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-    <div class="form-container">
+    <div class="form-container" *ngIf="show_form">
         <form [formGroup]="task" (ngSubmit)="logForm()">
             <ion-list class="form-list">
                 <ion-item>
                     <ion-label floating>Who</ion-label>
-                    <ion-select formControlName="who" interface="action-sheet">
-                        <ion-option value="Moi">Moi</ion-option>
-                        <ion-option value="Aziz">Aziz Lahlou</ion-option>
-                        <ion-option value="Omar">Omar Farad</ion-option>
+                    <ion-select formControlName="attachedTo" interface="action-sheet">
+                        <ion-option *ngFor="let u of users; let i=index" value="{{u.id}}">{{u.fullName}}</ion-option>
                     </ion-select>
                 </ion-item>
-                <!--<ion-item *ngIf="who.hasError('required') && who.touched">required</ion-item>-->
+                <!--<ion-item *ngIf="attachedTo.hasError('required') && who.touched">required</ion-item>-->
                 <ion-item>
                     <ion-label floating>Projet</ion-label>
                     <ion-select formControlName="project" interface="action-sheet">
-                        <ion-option value="Moi">Projet 01</ion-option>
-                        <ion-option value="Aziz">Projet 02</ion-option>
-                        <ion-option value="Omar">Projet 03</ion-option>
+                        <ion-option *ngFor="let p of projects; let i=index" value="{{p.id}}">{{p.client}} -
+                            {{p.region}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
@@ -40,62 +39,34 @@
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Description</ion-label>
-                    <ion-textarea rows="5"  formControlName="description"></ion-textarea>
+                    <ion-textarea rows="5" formControlName="description"></ion-textarea>
                 </ion-item>
                 <!-- <ion-item> -->
-                <button class="submit" clear ion-button color="secondary" type="submit" [disabled]="!task.valid">Submit</button>
+                <button class="submit" ion-button color="secondary" clear type="submit" [disabled]="!task.valid">Submit</button>
                 <!-- </ion-item> -->
             </ion-list>
         </form>
     </div>
 
     <ion-segment [(ngModel)]="what" color="dark" (ionChange)="segmentChanged($event)">
-        <ion-segment-button value="All">
+        <ion-segment-button value="all">
             All
         </ion-segment-button>
-        <ion-segment-button value="moi">
+        <ion-segment-button value="attachedToMe">
             Affecté à moi
         </ion-segment-button>
-        <ion-segment-button value="Related">
+        <ion-segment-button value="related">
             Related
         </ion-segment-button>
     </ion-segment>
 
     <div class="table-container">
         <ion-list reorder="true">
-            <ion-item>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, necessitatibus?</p>
+            <ion-item *ngFor="let task of tasks; let i=index">
+                <p>{{ task.description | slice:0:80}}...</p>
                 <div class="data">
-                    <span class="date">21/11</span>
-                    <span class="who">Khalid Ghomri</span>
-                </div>
-            </ion-item>
-            <ion-item>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, necessitatibus?</p>
-                <div class="data">
-                    <span class="date">21/11</span>
-                    <span class="who">Khalid Ghomri</span>
-                </div>
-            </ion-item>
-            <ion-item>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, necessitatibus?</p>
-                <div class="data">
-                    <span class="date">21/11</span>
-                    <span class="who">Khalid Ghomri</span>
-                </div>
-            </ion-item>
-            <ion-item>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, necessitatibus?</p>
-                <div class="data">
-                    <span class="date">21/11</span>
-                    <span class="who">Khalid Ghomri</span>
-                </div>
-            </ion-item>
-            <ion-item>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, necessitatibus?</p>
-                <div class="data">
-                    <span class="date">21/11</span>
-                    <span class="who">Khalid Ghomri</span>
+                    <span class="date">{{ task.date.timestamp | date:'dd/MM/yy' }}</span>
+                    <span class="who">{{ task.attachedTo.fullName }}</span>
                 </div>
             </ion-item>
         </ion-list>

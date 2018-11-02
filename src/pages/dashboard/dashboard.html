@@ -7,71 +7,88 @@
 <ion-header>
 
     <ion-navbar>
-        <head-app></head-app>
+        <button class="icon add" (click)="showForm()"></button>
+        <!-- <ion-title>task</ion-title> -->
+        <button class="icon voyant red"></button>
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-    <div class="form-container">
-        <ion-list class="form-list">
-            <ion-item>
-                <ion-label floating>Client</ion-label>
-                <ion-input></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Region</ion-label>
-                <ion-select [(ngModel)]="region" interface="action-sheet">
-                    <ion-option value="Rabat-Casa">Rabat/Casa</ion-option>
-                    <ion-option value="Centre">Centre</ion-option>
-                    <ion-option value="Kenitra">Kenitra</ion-option>
-                    <ion-option value="Tanger">Tanger</ion-option>
-                    <ion-option value="Autre">Autre</ion-option>
-                </ion-select>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Phase</ion-label>
-                <ion-select [(ngModel)]="phase" interface="action-sheet">
-                    <ion-option value="A">A</ion-option>
-                    <ion-option value="B">B</ion-option>
-                    <ion-option value="C">C</ion-option>
-                    <ion-option value="D">D</ion-option>
-                </ion-select>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Statuts</ion-label>
-                <ion-select [(ngModel)]="statuts" interface="action-sheet">
-                    <ion-option value="Conflict">Conflict</ion-option>
-                    <ion-option value="Robust">Robust</ion-option>
-                    <ion-option value="Fast track">Fast track</ion-option>
-                </ion-select>
-            </ion-item>
-            <ion-item class="progress">
-                <ion-label>Progress <span>{{ progress }}%</span></ion-label>
-                <ion-range min="0" max="100" [(ngModel)]="progress" color="secondary">
-                    <ion-label range-left>0%</ion-label>
-                    <ion-label range-right>100%</ion-label>
-                </ion-range>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Services</ion-label>
-                <ion-select [(ngModel)]="services" interface="action-sheet" multiple="true">
-                        <ion-option value="Autorisation">Autorisation</ion-option>
-                        <ion-option value="Architecture">Architecture</ion-option>
-                        <ion-option value="Design management">Design management</ion-option>
-                        <ion-option value="Works management">Works management</ion-option>
-                        <ion-option value="Structural">Structural</ion-option>
-                        <ion-option value="Mechanical">Mechanical</ion-option>
-                        <ion-option value="Electrical">Electrical</ion-option>
-                        <ion-option value="Infrastructure">Infrastructure</ion-option>
-                        <ion-option value="Legal assistance">Legal assistance</ion-option>
-                        <ion-option value="Topographical">Topographical</ion-option>
-                        <ion-option value="Gotechnical">Gotechnical</ion-option>
-                        <ion-option value="Fire consultant">Fire consultant</ion-option>
-                </ion-select>
-            </ion-item>
-            <button class="submit" ion-button color="secondary">Submit</button>
-        </ion-list>
+    <div class="form-container" *ngIf="show_form">
+        <form [formGroup]="project" (ngSubmit)="logForm()">
+            <ion-list class="form-list">
+                <ion-item>
+                    <ion-label floating>Client</ion-label>
+                    <ion-input formControlName="client"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Who</ion-label>
+                    <ion-select formControlName="user" interface="action-sheet">
+                        <ion-option *ngFor="let u of users; let i=index" value="{{u.id}}">{{u.fullName}}</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Region</ion-label>
+                    <ion-select formControlName="region" interface="action-sheet">
+                        <ion-option value="Rabat-Casa">Rabat/Casa</ion-option>
+                        <ion-option value="Centre">Centre</ion-option>
+                        <ion-option value="Kenitra">Kenitra</ion-option>
+                        <ion-option value="Tanger">Tanger</ion-option>
+                        <ion-option value="Autre">Autre</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Phase</ion-label>
+                    <ion-select formControlName="phase" interface="action-sheet">
+                        <ion-option value="A">A</ion-option>
+                        <ion-option value="B">B</ion-option>
+                        <ion-option value="C">C</ion-option>
+                        <ion-option value="D">D</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Statuts</ion-label>
+                    <ion-select formControlName="statuts" interface="action-sheet">
+                        <ion-option value="Conflict">Conflict</ion-option>
+                        <ion-option value="Robust">Robust</ion-option>
+                        <ion-option value="Fast track">Fast track</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item class="progress">
+                    <ion-label>Progress 
+                        <span *ngIf="project.value.progress > 0">{{ project.value.progress }} %</span>
+                        <span *ngIf="project.value.progress == 0">0 %</span>
+                    </ion-label>
+                    <ion-range min="0" max="100" step="5" formControlName="progress" color="secondary">
+                        <ion-label range-left>0%</ion-label>
+                        <ion-label range-right>100%</ion-label>
+                    </ion-range>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Services</ion-label>
+                    <ion-select formControlName="services" interface="action-sheet" multiple="true">
+                        <ion-option  *ngFor="let s of services; let i=index" value="{{s.id}}">{{s.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+                <button class="submit" ion-button color="secondary" clear type="submit" [disabled]="!project.valid">Submit</button>
+            </ion-list>
+        </form>
     </div>
+
+    <div class="table-container">
+            <ion-list>
+                <ion-item *ngFor="let p of projects; let i=index" (click)="detail(p)">
+                    <p>{{ p.client | slice:0:80}}...</p>
+                    <div class="data">
+                        <span class="region">Région: {{ p.region }}</span>
+                        <span class="statuts">Statuts: {{ p.statuts }}</span>
+                        <span class="phase">Phase: {{ p.phase }}</span>
+                        <span class="progress">Progress: {{ p.progress }}%</span>
+                        <span class="user">CP: {{ p.user.fullName }}</span>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </div>
 </ion-content>

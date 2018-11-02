@@ -1,0 +1,47 @@
+page-project-detail {
+
+    .list-header{
+        margin-bottom: 0;
+        border-top: 0;
+            .label{
+                color: color($colors, primary);
+            }
+    }
+    .list{
+        .item{
+            min-height: 30px;
+            .item-inner{
+                border-bottom: 0;
+                .input-wrapper{
+                    .label{
+                        margin: 8px 8px 2px 0;
+                    }
+                }
+            }
+        }
+
+        .data{
+            display: table;
+            width: 100%;
+            font-size: 14px;
+        }
+
+
+        &.project{
+            margin-top: 15px;
+            margin-bottom: 15px;
+            .data{
+                .label{
+                    font-weight: bold;
+                    color: color($colors, dark);
+                    display: inline-block;
+                    width: 95px;
+                }
+
+                .value{
+                    color: lighten(color($colors, dark), 15%);
+                }
+            }
+        }
+    }
+}
